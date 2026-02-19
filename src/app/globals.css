@@ -1,14 +1,58 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --background: #000000;
-  --foreground: #ffffff;
+@theme {
+  --font-oswald: var(--font-oswald);
+  --font-inter: var(--font-inter);
+  --color-dark-bg: #000000;
+  --color-dark-surface: #0a0a0a;
+  --color-dark-card: #121212;
+  --color-accent-blue: #00e5ff;
+  --color-accent-red: #ff003c;
+  --color-border-gray: #1e1e1e;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    @apply bg-black text-white selection:bg-accent-blue/30;
+    font-family: var(--font-inter), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-oswald {
+    font-family: var(--font-oswald), sans-serif;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .glass {
+    @apply bg-zinc-950/80 backdrop-blur-xl border border-white/5;
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+}
+
+@theme {
+  --color-gold: #D4AF37;
 }

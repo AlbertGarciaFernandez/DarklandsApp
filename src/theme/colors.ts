@@ -1,14 +1,14 @@
 export const colors = {
     background: '#000000', // Deepest Black
-    surface: '#121212', // Card background
-    surfaceHighlight: '#1E1E1E', // Slightly lighter
+    surface: '#0A0A0A', // Darker Card background
+    surfaceHighlight: '#121212', // Slightly lighter
     primary: '#FFFFFF', // White text
     secondary: '#888888', // Grey text
-    accent: '#00E5FF', // Cyan/Teal (from "Add to Schedule" button)
-    live: '#FF003C', // Red (from "Live Now")
-    border: '#333333', // Subtle borders
-    gold: '#D4AF37', // Gold for premium touches
+    accent: '#00E5FF', // Cyan/Teal
+    live: '#FF003C', // Neon Red
+    gold: '#D4AF37', // Premium Gold
+    border: '#1E1E1E', // Very subtle borders
     error: '#CF6679',
     success: '#00E5FF',
-    overlay: 'rgba(0, 0, 0, 0.85)',
+    overlay: 'rgba(0, 0, 0, 0.9)',
 };

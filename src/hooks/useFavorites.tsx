@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface FavoritesContextType {
     favorites: string[];
@@ -13,35 +12,24 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const [favorites, setFavorites] = useState<string[]>([]);
 
     useEffect(() => {
-        loadFavorites();
+        const stored = localStorage.getItem('favorites');
+        if (stored) {
+            try {
+                setFavorites(JSON.parse(stored));
+            } catch (e) {
+                console.error('Failed to parse favorites', e);
+            }
+        }
     }, []);
 
-    const loadFavorites = async () => {
-        try {
-            const stored = await AsyncStorage.getItem('favorites');
-            if (stored) {
-                setFavorites(JSON.parse(stored));
-            }
-        } catch (e) {
-            console.error('Failed to load favorites', e);
-        }
-    };
-
-    const saveFavorites = async (newFavorites: string[]) => {
-        try {
-            await AsyncStorage.setItem('favorites', JSON.stringify(newFavorites));
-        } catch (e) {
-            console.error('Failed to save favorites', e);
-        }
-    };
-
     const toggleFavorite = (eventId: string) => {
-        const newFavorites = favorites.includes(eventId)
-            ? favorites.filter(id => id !== eventId)
-            : [...favorites, eventId];
-
-        setFavorites(newFavorites);
-        saveFavorites(newFavorites);
+        setFavorites(prev => {
+            const next = prev.includes(eventId)
+                ? prev.filter(id => id !== eventId)
+                : [...prev, eventId];
+            localStorage.setItem('favorites', JSON.stringify(next));
+            return next;
+        });
     };
 
     const isFavorite = (eventId: string) => favorites.includes(eventId);
